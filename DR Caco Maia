@@ -1,0 +1,44 @@
+begin
+
+  if 
+     // Condições referente a abertura/fechamento em relação às MM
+     (open < media(8, Close))  and 
+     (open < media(20, close))    and
+     (close > media(8, close)) and
+     (close > media(20, close))   and
+
+     // Condições referentes às inclinações de médias
+     (media(8, close) > Media(8, close[1])) and
+     //(media(20, close) >= Media(20, close[1])) and
+
+     // Validação dos indicadores Trix e Stoch
+     (TRIX(7,1) > media(4, trix(7,1))) and
+     (SlowStochastic(14) > media(3, slowstochastic(14))) then
+
+    begin
+      PaintBar(clNavy);
+      select;
+    end
+
+  else 
+  if 
+     // Condições referente abertura/fechamento em relação às MM
+     (open > media(8, Close))  and 
+     (open > media(20, close))    and
+     (close < media(8, close)) and
+     (close < media(20, close))   and
+
+     // Condições referentes às inclinações de médias
+     (media(8, close) < Media(8, close[1])) and
+     //(media(20, close) <= Media(20, close[1])) and
+
+     // Validação dos indicadores Trix e Stoch
+     (TRIX(7,1) < media(4, trix(7,1))) and
+     (SlowStochastic(14) < media(3, slowstochastic(14))) then
+
+    begin
+      PaintBar(clMarrom);
+      select;
+    end;
+
+end;
